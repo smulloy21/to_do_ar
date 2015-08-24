@@ -1,0 +1,18 @@
+<h1 style="text-align: center; margin-bottom: 50px;">Update: <%= @task.description() %><i class="fa fa-tasks"></i></h1>
+
+<form action="/tasks/<%= @task.id() %>/edit" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <label for="description">New description:</label>
+  <input id="description" name="description" type="text">
+
+  <button type="submit" class="btn btn-success">Update task</button>
+</form>
+
+<form action="/tasks/<%= @task.id() %>/delete" method="post">
+  <input type="hidden" name="_method" value="delete">
+
+  <button type="submit" class="btn btn-success">Delete task</button>
+</form>
+<br>
+<a href="/lists/<%= @task.list().id() %>">Back to list</a><br>
+<a href="/">Home</a>

@@ -1,0 +1,21 @@
+<h1 style="text-align: center; margin-bottom: 50px;">Lists<i class="fa fa-tasks"></i></h1>
+
+
+<p>Here are all your lists:</p>
+
+
+<p><i>Create a new list:</i></p>
+
+<form action="/lists/new" method="post">
+  <label for="name">Name:</label>
+  <input id="name" name="name" type="text">
+
+  <button type="submit" class="btn btn-success">Add list</button>
+</form>
+
+<ul>
+  <% @lists.each() do |list| %>
+  <li><a href="/lists/<%= list.id %>"><%= list.name() %></a></li>
+  <% end %>
+
+</ul>

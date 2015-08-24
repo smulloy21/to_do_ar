@@ -51,4 +51,4 @@ delete('/tasks/:id/delete') do
   @list=@task.list()
   @task.destroy()
   redirect('/lists/' + @list.id.to_s)
-end 
+end

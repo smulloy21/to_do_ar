@@ -1,36 +1,42 @@
-<h1 style="text-align: center; margin-bottom: 50px;"><%= @list.name() %><i class="fa fa-tasks"></i></h1>
+<h1 style="margin-bottom: 50px;"><%= @list.name() %></h1>
 
 <p>Tasks:</p>
 
-<ul>
-  <% @tasks.each() do |task| %>
-  <li><a href="/tasks/<%= task.id %>"><%= task.description() %></a></li>
-  <% end %>
-</ul>
+<% if @tasks.any? %>
+  <ul>
+    <% @tasks.each() do |task| %>
+      <li><a href="/tasks/<%= task.id %>"><%= task.description() %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>This list currently has no tasks. Add one below.</p>
+<% end %>
 
 
 <p><i>Create a new task:</i></p>
 
 <form action="/tasks/new" method="post">
   <input type="hidden" name="id" value="<%= @list.id()%>">
-  <label for="description">Name:</label>
+  <label for="description">Task description:</label>
   <input id="description" name="description" type="text">
-
-  <button type="submit" class="btn btn-success">Add task</button>
+  <button type="submit" class="btn btn-primary">Add task</button>
 </form>
 
-<a href="/">Home</a>
+<br>
 
 <p><i>Edit <%= @list.name %> list:</i></p>
 <form action="/lists/<%= @list.id() %>/edit" method="post">
   <input type="hidden" name="_method" value="patch">
-  <label for="name">New name:</label>
+  <label for="name">New list name:</label>
   <input id="name" name="name" type="text">
-
-  <button type="submit" class="btn btn-success">Update list</button>
+  <button type="submit" class="btn btn-primary">Update list</button>
 </form>
 
 <form action="/lists/<%= @list.id() %>/delete" method="post">
   <input type="hidden" name="_method" value="delete">
-  <button type="submit" class="btn btn-success">Delete list</button>
+  <button type="submit" class="btn btn-danger">Delete list</button>
 </form>
+
+<br>
+
+<a href="/">Home</a>

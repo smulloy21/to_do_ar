@@ -1,21 +1,21 @@
-<h1 style="text-align: center; margin-bottom: 50px;">Lists<i class="fa fa-tasks"></i></h1>
-
+<h1 style="margin-bottom: 50px;">All Lists</h1>
 
 <p>Here are all your lists:</p>
-
-
+<% if @lists.any? %>
+  <ul>
+    <% @lists.each() do |list| %>
+      <li><a href="/lists/<%= list.id %>"><%= list.name() %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You currently have no lists. Add one below.</p>
+<% end %>
+<br>
 <p><i>Create a new list:</i></p>
 
 <form action="/lists/new" method="post">
-  <label for="name">Name:</label>
+  <label for="name">List name:</label>
   <input id="name" name="name" type="text">
 
-  <button type="submit" class="btn btn-success">Add list</button>
+  <button type="submit" class="btn btn-primary">Add list</button>
 </form>
-
-<ul>
-  <% @lists.each() do |list| %>
-  <li><a href="/lists/<%= list.id %>"><%= list.name() %></a></li>
-  <% end %>
-
-</ul>

@@ -33,6 +33,20 @@ post('/tasks/new') do
   redirect('/lists/' + @list.id.to_s())
 end
 
+patch('/lists/:id/edit') do
+  name = params.fetch('name')
+  @list = List.find(params.fetch('id').to_i())
+  @list.update({:name => name})
+  redirect('/lists/' + @list.id.to_s)
+end
+
+delete('/lists/:id/delete') do
+  @list = List.find(params.fetch('id').to_i())
+  @list.tasks.destroy()
+  @list.destroy()
+  redirect('/')
+end
+
 get("/tasks/:id") do #
   @task = Task.find(params.fetch('id').to_i())
   @list = @task.list()
@@ -42,8 +56,9 @@ end
 patch('/tasks/:id/edit') do
   description = params.fetch('description')
   @task = Task.find(params.fetch('id').to_i())
+  @list = @task.list()
   @task.update({:description => description})
-  redirect('/tasks/' + @task.id.to_s)
+  redirect('/lists/' + @list.id.to_s)
 end
 
 delete('/tasks/:id/delete') do

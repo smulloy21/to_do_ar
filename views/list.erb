@@ -20,3 +20,17 @@
 </form>
 
 <a href="/">Home</a>
+
+<p><i>Edit <%= @list.name %> list:</i></p>
+<form action="/lists/<%= @list.id() %>/edit" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <label for="name">New name:</label>
+  <input id="name" name="name" type="text">
+
+  <button type="submit" class="btn btn-success">Update list</button>
+</form>
+
+<form action="/lists/<%= @list.id() %>/delete" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit" class="btn btn-success">Delete list</button>
+</form>

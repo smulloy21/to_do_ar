@@ -27,8 +27,9 @@ end
 
 post('/tasks/new') do
   description = params.fetch('description')
+  due_date = params.fetch('due date')
   @list = List.find(params.fetch('id').to_i()) # here we fetch the list so that we can find the list to save it as a variable so that we can use it again.
-  @list.tasks.new({:description => description}) # created a new instance of task in that speccific list (Task.new({:description => description, :list_id => @list.id}))
+  @list.tasks.new({:description => description, :due_date => due_date}) # created a new instance of task in that speccific list (Task.new({:description => description, :list_id => @list.id}))
   @list.save()
   redirect('/lists/' + @list.id.to_s())
 end

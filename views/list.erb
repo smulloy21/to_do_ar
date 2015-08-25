@@ -1,24 +1,26 @@
-<h1 style="margin-bottom: 50px;"><%= @list.name() %></h1>
+<h1 style="font-size: 2em; margin-bottom: 50px;"><%= @list.name() %></h1>
 
 <p>Tasks:</p>
 
 <% if @tasks.any? %>
   <ul>
     <% @tasks.each() do |task| %>
-      <li><a href="/tasks/<%= task.id %>"><%= task.description() %></a></li>
+      <li><a href="/tasks/<%= task.id %>"><%= task.description() %> - Due: <%= Date.parse(task.due_date.to_s).strftime('%b %e') %></a></li>
     <% end %>
   </ul>
 <% else %>
   <p>This list currently has no tasks. Add one below.</p>
 <% end %>
 
-
+<br>
 <p><i>Create a new task:</i></p>
 
 <form action="/tasks/new" method="post">
   <input type="hidden" name="id" value="<%= @list.id()%>">
   <label for="description">Task description:</label>
-  <input id="description" name="description" type="text">
+  <input id="description" name="description" type="text"><br>
+  <label for="due date">Task due date:</label>
+  <input id="due date" name="due date" type="text" placeholder="yyyy-mm-dd">
   <button type="submit" class="btn btn-primary">Add task</button>
 </form>
 

@@ -43,6 +43,7 @@ describe('adding a task to a list', {:type => :feature}) do
     visit('/')
     click_link('Work')
     fill_in('description', :with => 'Stuff')
+    fill_in('due date', :with => '2015-08-25')
     click_button('Add task')
     expect(page).to have_content('Stuff')
   end
@@ -52,7 +53,7 @@ describe('updating a task', {:type => :feature}) do
   it('allows a user to update a list ') do
     list = List.new({:name => 'Coding HW'})
     list.save()
-    task = Task.new({:description => 'watch video', :list_id => list.id()})
+    task = Task.new({:description => 'watch video', :list_id => list.id(), :due_date => '2015-03-23'})
     task.save()
     visit('/')
     click_link('Coding HW')
@@ -67,7 +68,7 @@ describe('deleting a task', {:type => :feature}) do
   it('allows a user to delete a task ') do
     list = List.new({:name => 'More stuff'})
     list.save()
-    list.tasks.new({:description => 'do the stuff'})
+    list.tasks.new({:description => 'do the stuff', :due_date => '2015-03-23'})
     list.save()
     visit('/')
     click_link('More stuff')
